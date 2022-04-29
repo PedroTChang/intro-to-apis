@@ -1,27 +1,55 @@
 require "http"
 
-system "clear"
-puts "Welcome to the Dictionary App!"
-puts "Enter a word: "
-word = gets.chomp
-system "clear"
+while true
+  system "clear"
+  puts "Welcome to the Dictionary App!"
+  puts "Please input your necessary definitions, we will provide the top example, and pronunciation!: "
+  input_word = gets.chomp
 
-dict_entry = HTTP.get("https://api.wordnik.com/v4/word.json/#{word}/definitions?limit=200&includeRelated=false&useCanonical=false&includeTags=false&api_key=")
+  response = HTTP.get("https://api.wordnik.com/v4/word.json/#{input_word}/definitions?limit=200&includeRelated=false&useCanonical=false&includeTags=false&api_key=")
 
-definition = dict_entry.parse(:json)[3]["text"]
+  definitions = response.parse(:json)
 
-###
+  response = HTTP.get("https://api.wordnik.com/v4/word.json/#{input_word}/topExample?useCanonical=false&api_key=")
 
-examples = HTTP.get("https://api.wordnik.com/v4/word.json/ostentatious/topExample?useCanonical=false&api_key=")
+  top_example = response.parse(:json)
 
-top_example = examples.parse(:json)["text"]
+  response = HTTP.get("https://api.wordnik.com/v4/word.json/#{input_word}/pronunciations?useCanonical=false&limit=50&api_key=")
 
-puts "This is the definition:"
-puts definition
-puts "\n"
-puts "And here is the top example:"
-puts top_example
-puts "\n"
-# # starting to ask for top example and pronunciation
-# # pp dict_entry.parse(:json)
-# pp examples.parse
+  pronunciations = response.parse(:json)
+
+  puts "DEFINITIONS"
+
+  index = 0
+  definitions.length.times do
+    definition = definitions[index]["text"]
+    puts "#{index + 1}. #{definition}"
+    index += 1
+  end
+
+  puts
+
+  puts "TOP EXAMPLE"
+  puts top_example["text"]
+
+  puts
+
+  puts "PRONUNCIATION"
+
+  puts
+
+  index = 0
+  pronunciations.length.times do
+    pronunciation = pronunciations[index]["raw"]
+    puts "#{index + 1}. #{pronunciation}"
+    index += 1
+  end
+
+  puts "Enter q to quit, another key to continue..."
+  input_option = gets.chomp
+
+  if input_option == "q"
+    puts "Thank you so much! Goodbye!"
+    break
+  end
+end

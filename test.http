@@ -1,1 +1,6 @@
-GET https://api.wordnik.com/v4/word.json/ostentatious/definitions?limit=200&includeRelated=false&useCanonical=false&includeTags=false&api_key=7rzrusqms9ysbvd11ihq7idgk3slkzghxnqc6k6rmn3520mq9
+
+###
+GET https://api.wordnik.com/v4/word.json/ostentatious/topExample?useCanonical=false&api_key=22bf12vddbpizrmyfs90cf695e9j4u1seq52o4klisqmqn6v2
+
+###
+

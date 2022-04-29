@@ -1,1 +1,1 @@
-GET https://www.amazon.com/
+GET https://api.wordnik.com/v4/word.json/ostentatious/definitions?limit=200&includeRelated=false&useCanonical=false&includeTags=false&api_key=7rzrusqms9ysbvd11ihq7idgk3slkzghxnqc6k6rmn3520mq9

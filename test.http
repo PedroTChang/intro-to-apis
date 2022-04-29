@@ -4,3 +4,7 @@ GET https://api.wordnik.com/v4/word.json/ostentatious/topExample?useCanonical=fa
 
 ###
 
+GET https://api.coindesk.com/v1/bpi/currentprice.json
+
+###
+GET https://open.er-api.com/v6/latest/USD
